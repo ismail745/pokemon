@@ -7,7 +7,7 @@ export default function Games() {
   return (
     <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
       {versionGroups.map((vg) => (
-        <Chip key={vg.name} label={vg.name} size="small" />
+        <Chip key={vg.name} label={vg.name} color="secondary" variant="outlined" />
       ))}
     </Stack>
   )
