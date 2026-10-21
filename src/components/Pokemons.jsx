@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Alert, CircularProgress, List, ListItem, ListItemText, TextField } from '@mui/material'
+import { Alert, Avatar, CircularProgress, List, ListItem, ListItemAvatar, ListItemText, TextField } from '@mui/material'
 import { fetchGeneration, setSearch } from '../store/generationDetailSlice'
+
+// Sprite officiel PokéAPI, indexé par le numéro de Pokédex (dernier segment de l'URL de l'espèce)
+const SPRITES = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon'
+const spriteUrl = (url) => `${SPRITES}/${url.split('/').filter(Boolean).pop()}.png`
 
 export default function Pokemons() {
   const dispatch = useDispatch()
@@ -31,6 +35,9 @@ export default function Pokemons() {
         <List dense>
           {filtered.map((s) => (
             <ListItem key={s.name}>
+              <ListItemAvatar>
+                <Avatar src={spriteUrl(s.url)} alt={s.name} variant="square" slotProps={{ img: { loading: 'lazy' } }} />
+              </ListItemAvatar>
               <ListItemText primary={s.name} />
             </ListItem>
           ))}
